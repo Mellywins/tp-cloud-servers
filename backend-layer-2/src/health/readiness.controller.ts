@@ -2,11 +2,8 @@ import { Controller, Get } from '@nestjs/common';
 import {
   HealthCheckService,
   HealthCheck,
-  TypeOrmHealthIndicator,
-  MemoryHealthIndicator,
   HttpHealthIndicator,
 } from '@nestjs/terminus';
-import { AppController } from '../app.controller';
 
 @Controller('ready')
 export class ReadinessController {

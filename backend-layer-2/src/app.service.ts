@@ -1,11 +1,18 @@
-import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const Downloader = require('nodejs-file-downloader');
 @Injectable()
 export class AppService {
   private logger: Logger;
   constructor() {
     this.logger = new Logger('File Downloader');
+    if (
+      process.env.DOWNLOAD_PATH === undefined ||
+      process.env.DOWNLOAD_PATH === ''
+    ) {
+      this.logger.error('Environment Variable DOWNLOAD_PATH is not set');
+      process.exit(1);
+    }
   }
   async downloadFile(url: string): Promise<string> {
     console.log(url);
